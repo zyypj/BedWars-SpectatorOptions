@@ -24,7 +24,9 @@ public class ArenaJoin implements Listener {
 
         if (!p.hasPermission("bw.spectatoroptions")) return;
 
-        p.getInventory().setItem(slot, item);
+        Bukkit.getScheduler().runTaskLater(SpectatorOptions.getInstance(), () -> {
+            p.getInventory().setItem(slot, item);
+        }, 20L);
 
         CachedOptions cachedOptions = SpectatorManager.getInstance().getCachedOptions(p);
         if (cachedOptions == null) return;
