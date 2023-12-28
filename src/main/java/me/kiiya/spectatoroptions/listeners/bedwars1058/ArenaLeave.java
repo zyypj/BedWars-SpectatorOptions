@@ -11,6 +11,8 @@ public class ArenaLeave implements Listener {
         Player p = e.getPlayer();
 
         if (p.getActivePotionEffects().isEmpty()) return;
-        p.getActivePotionEffects().forEach(potionEffect -> p.removePotionEffect(potionEffect.getType()));
+
+Bukkit.getScheduler().runTaskLater(SpectatorOprions.getInstance(), () -> {        p.getActivePotionEffects().forEach(potionEffect -> p.removePotionEffect(potionEffect.getType()));
+       }, 20L);
     }
 }
