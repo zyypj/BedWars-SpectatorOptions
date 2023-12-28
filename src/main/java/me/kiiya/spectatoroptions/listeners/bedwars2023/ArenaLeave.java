@@ -1,0 +1,23 @@
+package me.kiiya.spectatoroptions.listeners.bedwars2023;
+
+import com.tomkeuper.bedwars.api.events.player.PlayerLeaveArenaEvent;
+import me.kiiya.spectatoroptions.player.CachedOptions;
+import me.kiiya.spectatoroptions.player.SpectatorManager;
+import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+
+public class ArenaLeave implements Listener {
+    @EventHandler
+    public void onArenaLeave(PlayerLeaveArenaEvent e) {
+        Player p = e.getPlayer();
+
+        if (!e.isSpectator()) return;
+        if (p.getActivePotionEffects().isEmpty()) return;
+        p.getActivePotionEffects().forEach(potionEffect -> p.removePotionEffect(potionEffect.getType()));
+
+        CachedOptions cachedOptions = SpectatorManager.getInstance().getCachedOptions(p);
+        if (cachedOptions == null) return;
+        cachedOptions.setFollowingPlayer(null);
+    }
+}
