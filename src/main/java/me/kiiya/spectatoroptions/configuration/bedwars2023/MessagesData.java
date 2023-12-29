@@ -20,17 +20,17 @@ public class MessagesData {
             switch (iso) {
                 default:
                     yml.addDefault(SPECTATOR_OPTIONS_ITEM_NAME, "&aSpectator Options");
-                    yml.addDefault(SPECTATOR_OPTIONS_ITEM_LORE, "&7Click to open the spectator options menu");
-                    yml.addDefault(OPTIONS_MENU_NAME, "&7Spectator Settings");
-                    yml.addDefault(OPTIONS_ITEM_NO_SPEED_NAME, "&7No Speed");
+                    yml.addDefault(SPECTATOR_OPTIONS_ITEM_LORE, Collections.singletonList("&7Click to edit spectator options"));
+                    yml.addDefault(OPTIONS_MENU_NAME, "&8Spectator Settings");
+                    yml.addDefault(OPTIONS_ITEM_NO_SPEED_NAME, "&aNo Speed");
                     yml.addDefault(OPTIONS_ITEM_NO_SPEED_LORE, "");
-                    yml.addDefault(OPTIONS_ITEM_SPEED_I_NAME, "&7Speed I");
+                    yml.addDefault(OPTIONS_ITEM_SPEED_I_NAME, "&aSpeed I");
                     yml.addDefault(OPTIONS_ITEM_SPEED_I_LORE, "");
-                    yml.addDefault(OPTIONS_ITEM_SPEED_II_NAME, "&7Speed II");
+                    yml.addDefault(OPTIONS_ITEM_SPEED_II_NAME, "&aSpeed II");
                     yml.addDefault(OPTIONS_ITEM_SPEED_II_LORE, "");
-                    yml.addDefault(OPTIONS_ITEM_SPEED_III_NAME, "&7Speed III");
+                    yml.addDefault(OPTIONS_ITEM_SPEED_III_NAME, "&aSpeed III");
                     yml.addDefault(OPTIONS_ITEM_SPEED_III_LORE, "");
-                    yml.addDefault(OPTIONS_ITEM_SPEED_IV_NAME, "&7Speed IV");
+                    yml.addDefault(OPTIONS_ITEM_SPEED_IV_NAME, "&aSpeed IV");
                     yml.addDefault(OPTIONS_ITEM_SPEED_IV_LORE, "");
                     yml.addDefault(OPTIONS_ITEM_AUTOTELEPORT_ENABLED_NAME, "&aEnable Auto Teleport");
                     yml.addDefault(OPTIONS_ITEM_AUTOTELEPORT_ENABLED_LORE, Collections.singletonList("&7Click to enable auto teleport!"));
@@ -41,7 +41,7 @@ public class MessagesData {
                     yml.addDefault(OPTIONS_ITEM_NIGHT_VISION_DISABLED_NAME, "&cDisable Night Vision");
                     yml.addDefault(OPTIONS_ITEM_NIGHT_VISION_DISABLED_LORE, Collections.singletonList("&7Click to disable night vision!"));
                     yml.addDefault(OPTIONS_ITEM_FIRST_PERSON_ENABLED_NAME, "&aEnable First Person");
-                    yml.addDefault(OPTIONS_ITEM_FIRST_PERSON_ENABLED_LORE, Arrays.asList("Click to enable first person!", "&7spectating when using the compass!", "&7You can also right-click a player!", "&7to spectate them in first person."));
+                    yml.addDefault(OPTIONS_ITEM_FIRST_PERSON_ENABLED_LORE, Arrays.asList("&7Click to enable first person!", "&7spectating when using the compass!", "&7You can also right-click a player!", "&7to spectate them in first person."));
                     yml.addDefault(OPTIONS_ITEM_FIRST_PERSON_DISABLED_NAME, "&cDisable First Person");
                     yml.addDefault(OPTIONS_ITEM_FIRST_PERSON_DISABLED_LORE, Collections.singletonList("&7Click to disable first person!"));
                     yml.addDefault(OPTIONS_ITEM_TOGGLE_SPECTATORS_ENABLED_NAME, "&cHide Spectators");

@@ -1,4 +1,6 @@
+me\kiiya\spectatoroptions\listeners\bedwars2023\PlayerKill.class
 me\kiiya\spectatoroptions\player\SpectatorPlayer.class
+me\kiiya\spectatoroptions\commands\OptionsMenuCommand.class
 me\kiiya\spectatoroptions\configuration\bedwars2023\MessagesData.class
 me\kiiya\spectatoroptions\SpectatorOptions.class
 me\kiiya\spectatoroptions\configuration\ConfigManager.class
@@ -14,6 +16,7 @@ me\kiiya\spectatoroptions\support\Support.class
 me\kiiya\spectatoroptions\utils\Utils.class
 me\kiiya\spectatoroptions\listeners\bedwars1058\ArenaLeave.class
 me\kiiya\spectatoroptions\menus\OptionsMenu$1.class
+me\kiiya\spectatoroptions\listeners\bedwars1058\PlayerKill.class
 me\kiiya\spectatoroptions\listeners\InventoryInteraction.class
 me\kiiya\spectatoroptions\listeners\ItemInteraction.class
 me\kiiya\spectatoroptions\player\CachedOptions.class

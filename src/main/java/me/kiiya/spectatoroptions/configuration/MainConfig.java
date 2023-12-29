@@ -19,7 +19,7 @@ public class MainConfig extends ConfigManager {
                 "--------------------------------\n");
 
         // Options menu item
-        yml.addDefault("options-item.material", "COMPASS");
+        yml.addDefault("options-item.material", "REDSTONE_COMPARATOR");
         yml.addDefault("options-item.amount", 1);
         yml.addDefault("options-item.data", 0);
         yml.addDefault("options-item.enchanted", false);

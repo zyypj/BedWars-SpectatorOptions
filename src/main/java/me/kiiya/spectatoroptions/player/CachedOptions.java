@@ -1,5 +1,7 @@
 package me.kiiya.spectatoroptions.player;
 
+import me.kiiya.spectatoroptions.SpectatorOptions;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 import javax.annotation.Nullable;
@@ -7,11 +9,12 @@ import javax.annotation.Nullable;
 public class CachedOptions {
     private final Player p;
     private Player followingPlayer;
+    private Player lastFollowingPlayer;
 
     private boolean autoTeleport;
     private boolean nightVision;
     private boolean firstPerson;
-    private boolean toggleSpectators;
+    private boolean hideSpectators;
 
     private int followingTaskId;
 
@@ -20,7 +23,7 @@ public class CachedOptions {
         autoTeleport = false;
         nightVision = false;
         firstPerson = false;
-        toggleSpectators = true;
+        hideSpectators = false;
         followingPlayer = null;
         followingTaskId = -1;
     }
@@ -53,12 +56,12 @@ public class CachedOptions {
         this.firstPerson = firstPerson;
     }
 
-    public boolean isToggleSpectators() {
-        return toggleSpectators;
+    public boolean isHideSpectators() {
+        return hideSpectators;
     }
 
-    public void setToggleSpectators(boolean toggleSpectators) {
-        this.toggleSpectators = toggleSpectators;
+    public void setHideSpectators(boolean hideSpectators) {
+        this.hideSpectators = hideSpectators;
     }
 
     @Nullable
@@ -69,6 +72,12 @@ public class CachedOptions {
     public void setFollowingPlayer(Player followingPlayer) {
         this.followingPlayer = followingPlayer;
     }
+    public Player getLastFollowingPlayer() {
+        return lastFollowingPlayer;
+    }
+    public void setLastFollowingPlayer(Player lastFollowingPlayer) {
+        this.lastFollowingPlayer = lastFollowingPlayer;
+    }
 
     public int getFollowingTaskId() {
         return followingTaskId;
@@ -76,13 +85,22 @@ public class CachedOptions {
 
     public void setFollowingTaskId(int followingTaskId) {
         this.followingTaskId = followingTaskId;
+        if (followingTaskId == -1) {
+            followingPlayer = null;
+        } else {
+            Bukkit.getScheduler().runTaskLater(SpectatorOptions.getInstance(), () -> {
+                Bukkit.getScheduler().cancelTask(followingTaskId);
+                this.followingTaskId = -1;
+                followingPlayer = null;
+            }, 120L);
+        }
     }
 
     public void destroy() {
         autoTeleport = false;
         nightVision = false;
         firstPerson = false;
-        toggleSpectators = false;
+        hideSpectators = false;
         followingPlayer = null;
     }
 }

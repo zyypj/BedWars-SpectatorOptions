@@ -5,6 +5,7 @@ import me.kiiya.spectatoroptions.configuration.MainConfig;
 import me.kiiya.spectatoroptions.configuration.bedwars1058.MessagesData;
 import me.kiiya.spectatoroptions.listeners.bedwars1058.ArenaJoin;
 import me.kiiya.spectatoroptions.listeners.bedwars1058.ArenaLeave;
+import me.kiiya.spectatoroptions.listeners.bedwars1058.PlayerKill;
 import me.kiiya.spectatoroptions.listeners.bedwars1058.SpectateEvent;
 import me.kiiya.spectatoroptions.support.Support;
 import me.kiiya.spectatoroptions.utils.Utils;
@@ -21,10 +22,10 @@ public class BedWars1058 {
     private void start() {
         p.setSupport(Support.BEDWARS1058);
         bedWars1058API = Bukkit.getServicesManager().getRegistration(com.andrei1058.bedwars.api.BedWars.class).getProvider();
-        Utils.log("--------------------------------");
-        Utils.log("SpectatorOptions by Kiiya");
-        Utils.log("Version: " + SpectatorOptions.getInstance().getDescription().getVersion());
-        Utils.log("--------------------------------");
+        Utils.log("&6&m--------------------------------");
+        Utils.log("&aSpectatorOptions by &eKiiya");
+        Utils.log("&aVersion: &e" + p.getDescription().getVersion());
+        Utils.log("&6&m--------------------------------");
         loadConfig();
         loadListeners();
     }
@@ -43,6 +44,7 @@ public class BedWars1058 {
         Bukkit.getPluginManager().registerEvents(new ArenaJoin(), p);
         Bukkit.getPluginManager().registerEvents(new ArenaLeave(), p);
         Bukkit.getPluginManager().registerEvents(new SpectateEvent(), p);
+        Bukkit.getPluginManager().registerEvents(new PlayerKill(), p);
         Utils.log("&aListeners loaded!");
     }
 }

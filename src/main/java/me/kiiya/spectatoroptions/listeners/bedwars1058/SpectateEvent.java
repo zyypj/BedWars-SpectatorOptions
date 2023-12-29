@@ -5,6 +5,7 @@ import me.kiiya.spectatoroptions.SpectatorOptions;
 import me.kiiya.spectatoroptions.player.CachedOptions;
 import me.kiiya.spectatoroptions.player.SpectatorManager;
 import me.kiiya.spectatoroptions.tasks.PlayerFollowPlayerTask;
+import me.kiiya.spectatoroptions.utils.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
@@ -27,28 +28,56 @@ public class SpectateEvent implements Listener {
         CachedOptions cachedOptions = SpectatorManager.getInstance().getCachedOptions(p);
         if (cachedOptions == null) return;
 
-        if (!cachedOptions.isAutoTeleport()) return;
+        try {
+            if (cachedOptions.isFirstPerson()) {
+                Player followingPlayer = (Player) e.getTo().getWorld().getNearbyEntities(e.getTo(), 1, 1, 1).stream().filter(entity -> entity instanceof Player).findFirst().orElse(null);
+                p.setGameMode(GameMode.SPECTATOR);
+                p.setSpectatorTarget(followingPlayer);
+                com.andrei1058.bedwars.BedWars.nms.sendTitle(p, Utils.getMsg(p, "spectator-first-person-enter-title").replace("{player}", followingPlayer.getDisplayName()), Utils.getMsg(p, "spectator-first-person-enter-subtitle").replace("{player}", cachedOptions.getFollowingPlayer().getName()), 0, 20, 0);
+                cachedOptions.setFollowingPlayer(null);
+                if (cachedOptions.getFollowingTaskId() != -1) {
+                    Bukkit.getScheduler().cancelTask(cachedOptions.getFollowingTaskId());
+                    cachedOptions.setFollowingTaskId(-1);
+                }
+                return;
+            }
+        } catch (Exception ignored) {
 
-        if (e.getTo().getWorld().getNearbyEntities(e.getTo(), 1, 1, 1).stream().noneMatch(entity -> entity instanceof Player)) {
+        }
+
+        if (cachedOptions.isAutoTeleport()) {
+            if (e.getTo().getWorld().getNearbyEntities(e.getTo(), 1, 1, 1).stream().noneMatch(entity -> entity instanceof Player)) {
+                if (cachedOptions.getFollowingTaskId() != -1) {
+                    Bukkit.getScheduler().cancelTask(cachedOptions.getFollowingTaskId());
+                    cachedOptions.setFollowingTaskId(-1);
+                }
+                return;
+            }
+
+            Player followingPlayer = (Player) e.getTo().getWorld().getNearbyEntities(e.getTo(), 1, 1, 1).stream().filter(entity -> entity instanceof Player).findFirst().orElse(null);
+            cachedOptions.setFollowingPlayer(followingPlayer);
+
+            if (cachedOptions.getLastFollowingPlayer() == null) {
+                cachedOptions.setLastFollowingPlayer(followingPlayer);
+            }
+
+            if (followingPlayer == null) return;
+            if (followingPlayer != cachedOptions.getLastFollowingPlayer()) {
+                cachedOptions.setLastFollowingPlayer(null);
+                if (cachedOptions.getFollowingTaskId() != -1) {
+                    Bukkit.getScheduler().cancelTask(cachedOptions.getFollowingTaskId());
+                    cachedOptions.setFollowingTaskId(-1);
+                }
+                return;
+            }
+
             if (cachedOptions.getFollowingTaskId() != -1) {
                 Bukkit.getScheduler().cancelTask(cachedOptions.getFollowingTaskId());
+                cachedOptions.setFollowingTaskId(-1);
             }
-            return;
-        }
 
-        cachedOptions.setFollowingPlayer((Player) e.getTo().getWorld().getNearbyEntities(e.getTo(), 1, 1, 1).stream().filter(entity -> entity instanceof Player).findFirst().orElse(null));
-
-        if (cachedOptions.getFollowingTaskId() != -1) {
-            Bukkit.getScheduler().cancelTask(cachedOptions.getFollowingTaskId());
-        }
-
-        int followTaskId = Bukkit.getScheduler().runTaskTimerAsynchronously(SpectatorOptions.getInstance(), new PlayerFollowPlayerTask(p, cachedOptions.getFollowingPlayer()), 0, 1).getTaskId();
-        cachedOptions.setFollowingTaskId(followTaskId);
-
-        if (cachedOptions.isFirstPerson()) {
-            p.setGameMode(GameMode.SPECTATOR);
-            p.setSpectatorTarget(cachedOptions.getFollowingPlayer());
-            cachedOptions.setFollowingPlayer(null);
+            int followTaskId = Bukkit.getScheduler().runTaskTimerAsynchronously(SpectatorOptions.getInstance(), new PlayerFollowPlayerTask(p, cachedOptions.getFollowingPlayer()), 0, 60L).getTaskId();
+            cachedOptions.setFollowingTaskId(followTaskId);
         }
     }
 }

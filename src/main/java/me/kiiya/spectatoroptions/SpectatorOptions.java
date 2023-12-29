@@ -1,6 +1,7 @@
 package me.kiiya.spectatoroptions;
 
 import com.tomkeuper.bedwars.api.BedWars;
+import me.kiiya.spectatoroptions.commands.OptionsMenuCommand;
 import me.kiiya.spectatoroptions.configuration.MainConfig;
 import me.kiiya.spectatoroptions.listeners.InventoryInteraction;
 import me.kiiya.spectatoroptions.listeners.ItemInteraction;
@@ -27,6 +28,7 @@ public final class SpectatorOptions extends JavaPlugin {
         loadSupport();
         if (disabled) return;
         loadListeners();
+        loadCommands();
     }
 
     @Override
@@ -49,6 +51,10 @@ public final class SpectatorOptions extends JavaPlugin {
     private void loadListeners() {
         getServer().getPluginManager().registerEvents(new InventoryInteraction(), this);
         getServer().getPluginManager().registerEvents(new ItemInteraction(), this);
+    }
+
+    private void loadCommands() {
+        getCommand("bwso").setExecutor(new OptionsMenuCommand());
     }
 
     public static SpectatorOptions getInstance() {
