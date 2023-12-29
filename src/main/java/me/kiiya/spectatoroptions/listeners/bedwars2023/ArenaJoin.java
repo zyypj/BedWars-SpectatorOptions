@@ -42,7 +42,9 @@ public class ArenaJoin implements Listener {
         }
 
         if (cachedOptions.isNightVision()) {
-            p.addPotionEffect(new PotionEffect(PotionEffectType.NIGHT_VISION, Integer.MAX_VALUE, 0, false, false));
+            Bukkit.getScheduler().runTaskLater(SpectatorOptions, () -> {
+                p.addPotionEffect(new PotionEffect(PotionEffectType.NIGHT_VISION, Integer.MAX_VALUE, 0, false, false));
+            }, 20L);
         } else {
             Bukkit.getScheduler().runTaskLater(SpectatorOptions, () -> {
                 p.removePotionEffect(PotionEffectType.NIGHT_VISION);
