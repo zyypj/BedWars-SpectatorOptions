@@ -33,7 +33,7 @@ public class SpectateEvent implements Listener {
                 Player followingPlayer = (Player) e.getTo().getWorld().getNearbyEntities(e.getTo(), 1, 1, 1).stream().filter(entity -> entity instanceof Player).findFirst().orElse(null);
                 p.setGameMode(GameMode.SPECTATOR);
                 p.setSpectatorTarget(followingPlayer);
-                com.andrei1058.bedwars.BedWars.nms.sendTitle(p, Utils.getMsg(p, "spectator-first-person-enter-title").replace("{player}", followingPlayer.getDisplayName()), Utils.getMsg(p, "spectator-first-person-enter-subtitle").replace("{player}", cachedOptions.getFollowingPlayer().getName()), 0, 20, 0);
+                com.andrei1058.bedwars.BedWars.nms.sendTitle(p, Utils.getMsg(p, "spectator-first-person-enter-title").replace("%bw_player%", followingPlayer.getDisplayName()), Utils.getMsg(p, "spectator-first-person-enter-subtitle").replace("{player}", followingPlayer.getDisplayName()), 0, 20, 0);
                 cachedOptions.setFollowingPlayer(null);
                 if (cachedOptions.getFollowingTaskId() != -1) {
                     Bukkit.getScheduler().cancelTask(cachedOptions.getFollowingTaskId());
