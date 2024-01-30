@@ -6,7 +6,7 @@
 
   <groupId>me.kiiya</groupId>
   <artifactId>BedWars-SpectatorOptions</artifactId>
-  <version>1.0-Hotfix</version>
+  <version>1.1</version>
   <packaging>jar</packaging>
 
   <name>BedWars-SpectatorOptions</name>
