@@ -5,7 +5,6 @@ author: Kiiya
 authors:
   - Kiiya
 description: SpectatorOptions for BedWars
-api-version: 1.8
 softdepend: [ BedWars1058, BedWars2023, PlaceholderAPI ]
 commands:
     bwso:
