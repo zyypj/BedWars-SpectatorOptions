@@ -21,7 +21,7 @@ public class MessagesData {
                 default:
                     yml.addDefault(SPECTATOR_OPTIONS_ITEM_NAME, "&aSpectator Options");
                     yml.addDefault(SPECTATOR_OPTIONS_ITEM_LORE, Collections.singletonList("&7Click to edit spectator options"));
-                    yml.addDefault(OPTIONS_MENU_NAME, "&8Spectator Settings");
+                    yml.addDefault(OPTIONS_MENU_NAME, "&8Spectator Settings")
                     yml.addDefault(OPTIONS_ITEM_NO_SPEED_NAME, "&aNo Speed");
                     yml.addDefault(OPTIONS_ITEM_NO_SPEED_LORE, "");
                     yml.addDefault(OPTIONS_ITEM_SPEED_I_NAME, "&aSpeed I");
